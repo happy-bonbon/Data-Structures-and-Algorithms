@@ -10,8 +10,8 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "redirectOutput": true,
-            "justMyCode": true
+            "justMyCode": true,
+            "redirectOutput": true
         }
     ]
 }
