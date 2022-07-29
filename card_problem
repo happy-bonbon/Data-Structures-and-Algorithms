@@ -1,6 +1,9 @@
 '''Thank you'''
 from colorama import Fore
 
+# mid,1st,last.
+# one element, empty, none exists
+# repeat number, more than one pos
 tests = []
 tests.append({'Case': 0,
               'input': {
@@ -52,6 +55,11 @@ tests.append({'Case': 9,
                   'card': [8, 8, 6, 6, 6, 6, 6, 3, 2, 2, 2, 0, 0, 0],
                   'query': 6},
               'output': 2})
+tests.append({'Case': 10,
+              'input': {
+                  'card': [6, 6, 6, 6, 6, 6, 6, 3, 2, 2, 2, 0, 0, 0],
+                  'query': 6},
+              'output': 0})
 
 
 # def locate_card(card, query):
@@ -66,10 +74,43 @@ tests.append({'Case': 9,
 #     else:
 #         return -1
 
+# def test_location(card, query, mid):
+#     midnumber = card[mid]
+#     if midnumber == query:
+#         if mid-1 >= 0 and midnumber == card[mid-1]:
+#             return "left"
+#         else:
+#             return "found"
+#     elif midnumber > query:
+#         return "right"
+#     elif midnumber < query:
+#         return "left"
+
+
+# def locate_card(card, query):
+#     low, high = 0, len(card)-1
+#     while low <= high:
+#         mid = (low+high) // 2
+#         pos = test_location(card, query, mid)
+#         if pos == "left":
+#             high = mid-1
+#         elif pos == "right":
+#             low = mid+1
+#         elif pos == "found":
+#             return mid
+#     return -1
 
 # BST
+def check1st(card, mid):
+    '''Finds the index of the first query card'''
+    if mid-1 >= 0 and card[mid] == card[mid-1]:
+        return check1st(card, mid-1)
+    else:
+        return mid
+
+
 def locate_card(card, query):
-    '''Finds the index of the card'''
+    '''Finds the index of the query card'''
     low, high = 0, len(card)-1
     while high >= low:
         mid = (low+high)//2
@@ -82,13 +123,6 @@ def locate_card(card, query):
     return -1
 
 
-def check1st(card, mid):
-    if mid >= 1 and card[mid] == card[mid-1]:
-        return check1st(card, mid-1)
-    else:
-        return mid
-
-
 for test in tests:
     if locate_card(**test['input']) == test['output']:
         print(Fore.BLUE + 'Case ' +
@@ -96,8 +130,3 @@ for test in tests:
     else:
         print(Fore.BLUE + 'Case ' +
               str(test['Case']) + ':' + Fore.RED + ' GG!')
-
-
-# mid,1st,last.
-# one element, empty, none exists
-# repeat number, more than one pos
