@@ -5,6 +5,6 @@
 # fh = open(r'C:\Users\Bonbon\Desktop\Code\Python-Data-Structures\words.txt')
 fh = open('words.txt')
 for line in fh:
-    line=line.rstrip().upper()
+    line = line.rstrip().upper()
     # line=line
     print(line)

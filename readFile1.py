@@ -7,4 +7,4 @@ for line in fh:
         continue
     count += 1
     total += float(line.split(" ")[1])
-print("Average spam confidence: "+ str(total / count))
+print("Average spam confidence: " + str(total / count))

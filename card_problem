@@ -62,6 +62,7 @@ tests.append({'Case': 10,
               'output': 0})
 
 
+# Linear Search O(1) O(n)
 # def locate_card(card, query):
 #     for item in card:
 #         if item == query:
@@ -74,6 +75,8 @@ tests.append({'Case': 10,
 #     else:
 #         return -1
 
+
+# Binary Search O(1) O(logn)
 # def test_location(card, query, mid):
 #     midnumber = card[mid]
 #     if midnumber == query:
@@ -100,7 +103,7 @@ tests.append({'Case': 10,
 #             return mid
 #     return -1
 
-# BST
+
 def check1st(card, mid):
     '''Finds the index of the first query card'''
     if mid-1 >= 0 and card[mid] == card[mid-1]:
