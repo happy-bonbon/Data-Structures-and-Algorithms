@@ -1,82 +1,95 @@
 from colorama import Fore
 from regex import P
-from sympy import re
+from sympy import Q, re
 
 tests = []
-tests.append({
-    'input': {
-        'card': [13, 11, 10, 7, 4, 3, 1, 0],
-        'query': 7},
-    'output': 3})
-tests.append({
-    'input': {
-        'card': [13, 11, 10, 7, 4, 3, 1, 0],
-        'query': 7},
-    'output': 3})
-tests.append({
-    'input': {
-        'card': [13, 11, 10, 7, 4, 3, 1, 0],
-        'query': 1},
-    'output': 6})
-tests.append({
-    'input': {
-        'card': [4, 2, 1, -1],
-        'query': 4},
-    'output': 0})
-tests.append({
-    'input': {
-        'card': [3, -1, -9, -127],
-        'query': -127},
-    'output': 3})
-tests.append({
-    'input': {
-        'card': [6],
-        'query': 6},
-    'output': 0})
-tests.append({
-    'input': {
-        'card': [9, 7, 5, 2, -9],
-        'query': 4},
-    'output': -1})
-tests.append({
-    'input': {
-        'card': [],
-        'query': 7},
-    'output': -1})
-tests.append({
-    'input': {
-        'card': [8, 8, 6, 6, 6, 6, 6, 3, 2, 2, 2, 0, 0, 0],
-        'query': 3},
-    'output': 7})
-tests.append({
-    'input': {
-        'card': [8, 8, 6, 6, 6, 6, 6, 3, 2, 2, 2, 0, 0, 0],
-        'query': 6},
-    'output': 2})
+tests.append({'Case': 0,
+              'input': {
+                  'card': [13, 11, 10, 7, 4, 3, 1, 0],
+                  'query': 7},
+              'output': 3})
+tests.append({'Case': 1,
+              'input': {
+                  'card': [13, 11, 10, 7, 4, 3, 1, 0],
+                  'query': 7},
+              'output': 3})
+tests.append({'Case': 2,
+              'input': {
+                  'card': [13, 11, 10, 7, 4, 3, 1, 0],
+                  'query': 1},
+              'output': 6})
+tests.append({'Case': 3,
+              'input': {
+                  'card': [4, 2, 1, -1],
+                  'query': 4},
+              'output': 0})
+tests.append({'Case': 4,
+              'input': {
+                  'card': [3, -1, -9, -127],
+                  'query': -127},
+              'output': 3})
+tests.append({'Case': 5,
+              'input': {
+                  'card': [6],
+                  'query': 6},
+              'output': 0})
+tests.append({'Case': 6,
+              'input': {
+                  'card': [9, 7, 5, 2, -9],
+                  'query': 4},
+              'output': -1})
+tests.append({'Case': 7,
+              'input': {
+                  'card': [],
+                  'query': 7},
+              'output': -1})
+tests.append({'Case': 8,
+              'input': {
+                  'card': [8, 8, 6, 6, 6, 6, 6, 3, 2, 2, 2, 0, 0, 0],
+                  'query': 3},
+              'output': 7})
+tests.append({'Case': 9,
+              'input': {
+                  'card': [8, 8, 6, 6, 6, 6, 6, 3, 2, 2, 2, 0, 0, 0],
+                  'query': 6},
+              'output': 2})
 
 
 # def locate_card(card, query):
-#     pos=0
-#     while True:
-#         if card[pos]==query:
-#             return pos
-#         pos=pos+1
-#         if pos==len(card):
-#             return -1
-
+#     for item in card:
+#         if item == query:
+#             return card.index(item)
+#     return -1
 
 def locate_card(card, query):
-    for item in card:
-        if item == query:
-            return card.index(item)
-    return -1
+    if query in card:
+        return card.index(query)
+    else:
+        return -1
+
+
+# BST
+# def locate_card(card, query):
+#     if query in card:
+#         mid = int(len(card)/2)
+#         print(mid)
+#         print(card[mid:])
+#         if card[mid] == query:
+#             return mid
+#         elif card[mid] > query:
+#             locate_card(card[mid:], query)
+#         else:
+#             locate_card(card[:mid], query)
+#     else:
+#         return -1
 
 
 for test in tests:
     if locate_card(**test['input']) == test['output']:
-        print(Fore.GREEN + 'PASS')
+        print(Fore.BLUE + 'Case ' +
+              str(test['Case']) + ':' + Fore.GREEN + ' PASS!')
     else:
-        print(Fore.RED + 'GG')
+        print(Fore.BLUE + 'Case: ' + str(test['Case']) + Fore.RED + ' GG!')
 
 
 # mid,1st,last.
