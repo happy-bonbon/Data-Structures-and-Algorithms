@@ -1,6 +1,5 @@
+'''Thank you'''
 from colorama import Fore
-from regex import P
-from sympy import Q, re
 
 tests = []
 tests.append({'Case': 0,
@@ -61,27 +60,33 @@ tests.append({'Case': 9,
 #             return card.index(item)
 #     return -1
 
-def locate_card(card, query):
-    if query in card:
-        return card.index(query)
-    else:
-        return -1
+# def locate_card(card, query):
+#     if query in card:
+#         return card.index(query)
+#     else:
+#         return -1
 
 
 # BST
-# def locate_card(card, query):
-#     if query in card:
-#         mid = int(len(card)/2)
-#         print(mid)
-#         print(card[mid:])
-#         if card[mid] == query:
-#             return mid
-#         elif card[mid] > query:
-#             locate_card(card[mid:], query)
-#         else:
-#             locate_card(card[:mid], query)
-#     else:
-#         return -1
+def locate_card(card, query):
+    '''Finds the index of the card'''
+    low, high = 0, len(card)-1
+    while high >= low:
+        mid = (low+high)//2
+        if card[mid] == query:
+            return check1st(card, mid)
+        elif card[mid] > query:
+            low = mid+1
+        elif card[mid] < query:
+            high = mid-1
+    return -1
+
+
+def check1st(card, mid):
+    if mid >= 1 and card[mid] == card[mid-1]:
+        return check1st(card, mid-1)
+    else:
+        return mid
 
 
 for test in tests:
@@ -89,7 +94,8 @@ for test in tests:
         print(Fore.BLUE + 'Case ' +
               str(test['Case']) + ':' + Fore.GREEN + ' PASS!')
     else:
-        print(Fore.BLUE + 'Case: ' + str(test['Case']) + Fore.RED + ' GG!')
+        print(Fore.BLUE + 'Case ' +
+              str(test['Case']) + ':' + Fore.RED + ' GG!')
 
 
 # mid,1st,last.
