@@ -104,26 +104,55 @@ tests.append({'Case': 10,
 #     return -1
 
 
-def check1st(card, mid):
-    '''Finds the index of the first query card'''
-    if mid-1 >= 0 and card[mid] == card[mid-1]:
-        return check1st(card, mid-1)
-    else:
-        return mid
+# def check1st(card, mid):
+#     '''Finds the index of the first query card'''
+#     if mid-1 >= 0 and card[mid] == card[mid-1]:
+#         return check1st(card, mid-1)
+#     else:
+#         return mid
+
+
+# def locate_card(card, query):
+#     '''Finds the index of the query card'''
+#     low, high = 0, len(card)-1
+#     while high >= low:
+#         mid = (low+high)//2
+#         if card[mid] == query:
+#             return check1st(card, mid)
+#         elif card[mid] > query:
+#             low = mid+1
+#         elif card[mid] < query:
+#             high = mid-1
+#     return -1
+
+def binary_tree(lo, hi, condition):
+    while lo <= hi:
+        mid = (lo + hi) // 2
+        result = condition(mid)
+        if result == 'found':
+            return mid
+        elif result == 'left':
+            hi = mid - 1
+        else:
+            lo = mid + 1
+    return -1
 
 
 def locate_card(card, query):
-    '''Finds the index of the query card'''
-    low, high = 0, len(card)-1
-    while high >= low:
-        mid = (low+high)//2
+
+    def condition(mid):
         if card[mid] == query:
-            return check1st(card, mid)
+            if mid > 0 and card[mid-1] == query:
+                return 'left'
+            else:
+                return 'found'
         elif card[mid] > query:
-            low = mid+1
-        elif card[mid] < query:
-            high = mid-1
-    return -1
+            return 'right'
+        else:
+            return 'left'
+    
+    lo, hi = 0, len(card) - 1
+    return binary_tree(lo, hi, condition)
 
 
 for test in tests:
