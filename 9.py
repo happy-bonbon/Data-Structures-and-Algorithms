@@ -23,6 +23,29 @@ Output: false
 Explanation: Reads 01 from right to left. Therefore it is not a palindrome. """
 
 
+# x=0
+# x = 121
+# x = 1234567
+# x=100000001
+x = 1234567890987654321
+
+
+def isPalindrome(x):
+    '''no string faster version'''
+    number, orignal_number = 0, x
+    if x >= 0:
+        while x > 0:
+            digit = x % 10
+            number = number * 10 + digit
+            x = x // 10
+        return number == orignal_number
+    else:
+        return False
+
+
+print(isPalindrome(x))
+
+
 # def palindrome(x):
 #     '''with string'''
 #     return str(x) == str(x)[::-1]
@@ -49,26 +72,3 @@ Explanation: Reads 01 from right to left. Therefore it is not a palindrome. """
 #         return True
 #     else:
 #         return False
-
-
-# x=0
-# x = 121
-# x = 1234567
-# x=100000001
-x = 1234567890987654321
-
-
-def isPalindrome(x):
-    '''no string faster version'''
-    number, orignal_number = 0, x
-    if x >= 0:
-        while x > 0:
-            digit = x % 10
-            number = number * 10 + digit
-            x = x // 10
-        return number == orignal_number
-    else:
-        return False
-
-
-print(isPalindrome(x))
