@@ -22,74 +22,36 @@ Constraints:
 s consists of parentheses only '()[]{}'.
 """
 
-
-s = "{[()]}"
 s = "([)]"
-s = "(]"
 s = "()"
 s = "()[]{}"
+s = "(]"
+s = "{[()]}"
+s = "["
 s = "([]())[{()}]{}"
 
 
 def isValid(s):
+    '''look for the inner most close bracket, match it and then delete it, repeat'''
+    hashmap = {')': '(', ']': '[', '}': '{'}
 
-    hashmap = {'(': ')', '[': ']', '{': '}'}
-    print(hashmap)
-
-    if len(s) % 2 == 0:
-        mid = int(len(s)/2)
-        left = s[:mid]
-        print(left)
-        right = s[-1:mid-1:-1]
-        print(right)
-
-        for i in range(mid):
-            print(hashmap[left[i]])
-            if hashmap[left[i]] != right[i] and hashmap[left[i]] != s[i+1]:
+    while len(s) > 0:
+        lst = []
+        if ')' in s:
+            lst.append(s.index(')'))
+        if ']' in s:
+            lst.append(s.index(']'))
+        if '}' in s:
+            lst.append(s.index('}'))
+        if len(lst) > 0:
+            index = min(lst)
+            if index < 1 or hashmap[s[index]] != s[index-1]:
                 return False
-        return True
-
-        # strs=s[::2]
-        # print(strs)
-        # for i in range(len(strs)-1):
-        #     print(i)
-        #     print(s[i])
-        #     if strs[i] == '(' and s[i+1] != ')':
-        #         return False
-        #     elif strs[i] == '[' and s[i+1] != ']':
-        #         return False
-        #     elif strs[i] == '{' and s[i+1] != '}':
-        #         return False
-
-            # if s[i] != ')' and s[i] != ']' and s[i] != '}':
-
-            #     print('ok')
-    else:
-        return False
+            else:
+                s = s[:index-1]+s[index+1::]
+        else:
+            return False
+    return True
 
 
-# def isValid(s):
-#     a, b, c = 0, 0, 0
-#     if len(s) % 2 == 0:
-#         for item in s:
-#             if item == '(':
-#                 a += 1
-#             elif item == '[':
-#                 b += 1
-#             elif item == '{':
-#                 c += 1
-#             elif item == ')':
-#                 a -= 1
-#             elif item == ']':
-#                 b -= 1
-#             elif item == '}':
-#                 c -= 1
-#         if a == b == c == 0:
-#             return True
-#         else:
-#             return False
-#     else:
-#         return False
-
-# isValid(s)
 print(isValid(s))
