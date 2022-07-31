@@ -150,7 +150,6 @@ def locate_card(card, query):
             return 'right'
         else:
             return 'left'
-    
     lo, hi = 0, len(card) - 1
     return binary_tree(lo, hi, condition)
 
